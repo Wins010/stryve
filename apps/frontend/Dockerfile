@@ -2,14 +2,19 @@ FROM node:18-bullseye
 
 WORKDIR /app
 
-# Copy only the lock + package files first (for caching)
+# Copy lock + package files first
 COPY package.json package-lock.json ./
 
-# Copy the rest of the frontend files
-COPY . .
+# Install Expo CLI **and ngrok** globally first
+RUN npm install -g expo-cli @expo/ngrok
 
-RUN npm install -g expo-cli && npm install
+# Install project dependencies
+RUN npm install
+
+# Copy the rest of the code
+COPY . .
 
 EXPOSE 8081
 
-CMD ["npx", "expo", "start", "--lan", "--non-interactive"]
+# CI=0 enables QR code; use tunnel mode automatically
+CMD ["sh", "-c", "CI=0 npx expo start --tunnel"]
