@@ -1,5 +1,4 @@
 # docker-compose.yml
-version: "3.8"
 
 services:
   frontend:
@@ -12,4 +11,6 @@ services:
     volumes:
       - ./apps/frontend:/app        # Mount source code
       - /app/node_modules           # Avoid overwriting installed node_modules
-    command: sh -c "CI=0 npx expo start --tunnel"
+    command: sh -c "CI=0 npx expo start --lan"
+    #changed from --tunnel to --lan 15/12/2025 6:09 AM @Sult9n0-0
+    #tunnel isnt working we changed it to lan for now but it works

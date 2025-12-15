@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 8081
 
 # CI=0 enables QR code; use tunnel mode automatically
-CMD ["sh", "-c", "CI=0 npx expo start --tunnel"]
+CMD ["sh", "-c", "CI=0 npx expo start --lan"]
+#changed from --tunnel to --lan 15/12/2025 6:09 AM @Sult9n0-0
